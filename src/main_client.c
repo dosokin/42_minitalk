@@ -15,10 +15,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#define MAIN_PROCESS 1
+
 static void	panic_server(int sig)
 {
 	(void)sig;
-	write(2, "Error\nserver exited unexpectedly\n", 33);
+	write(2, "Error\nunknown error occurred\n", 29);
 	exit(1);
 }
 
@@ -45,7 +47,7 @@ int	main(int argc, char **argv)
 	}
 	error = false;
 	pid = ft_safe_atoi(argv[1], &error);
-	if (error)
+	if (error || pid <= MAIN_PROCESS)
 		return (1);
 	set_sig_handler(SIGUSR1, server_available);
 	set_sig_handler(SIGUSR2, panic_server);

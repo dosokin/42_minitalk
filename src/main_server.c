@@ -41,5 +41,5 @@ int	main(void)
 	set_sig_handler(SIGUSR1, receive_msg);
 	set_sig_handler(SIGUSR2, receive_msg);
 	while (1)
-		sleep(10);
+		pause();
 }
