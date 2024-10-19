@@ -6,7 +6,7 @@
 /*   By: dosokin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 23:23:20 by dosokin           #+#    #+#             */
-/*   Updated: 2024/10/19 12:39:43 by dosokin          ###   ########.fr       */
+/*   Updated: 2024/10/19 13:25:50 by dosokin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	panic_server(int sig)
 static void	set_sig_handler(int sig, void (f)(int))
 {
 	struct sigaction	new_action;
-    sigset_t		    set;
+	sigset_t			set;
 
-    sigemptyset(&set);
-    new_action.sa_mask = set;
-    new_action.sa_handler = f;
+	sigemptyset(&set);
+	new_action.sa_mask = set;
+	new_action.sa_handler = f;
 	new_action.sa_flags = SA_NODEFER;
 	sigaction(sig, &new_action, NULL);
 }
