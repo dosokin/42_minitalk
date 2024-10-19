@@ -11,12 +11,12 @@ FLAGS = -g -Wall -Werror -Wextra -I includes/
 LIBS = src/libft/
 BUILT_LIBS = src/libft/libft.a
 
-all : $(SERVER_NAME) $(CLIENT_NAME)
+all : $(BUILT_LIBS) $(SERVER_NAME) $(CLIENT_NAME)
 
-$(SERVER_NAME) : $(BUILT_LIBS) $(SERVER_OBJS)
+$(SERVER_NAME) : $(SERVER_OBJS)
 	$(CC) $(FLAGS) $(SERVER_OBJS) $(BUILT_LIBS) -o $(SERVER_NAME)
 
-$(CLIENT_NAME) : $(BUILT_LIBS) $(CLIENT_OBJS)
+$(CLIENT_NAME) : $(CLIENT_OBJS)
 	$(CC) $(FLAGS) $(CLIENT_OBJS) $(BUILT_LIBS) -o $(CLIENT_NAME)
 
 %.o : %.c
@@ -30,9 +30,7 @@ clean :
 	rm -rf $(CLIENT_OBJS)
 
 fclean : clean
-	for dir in $(LIBS); do \
-      	make fclean -C $$dir; \
-    done
+	rm -rf $(BUILT_LIBS)
 	rm -rf $(SERVER_NAME)
 	rm -rf $(CLIENT_NAME)
 
