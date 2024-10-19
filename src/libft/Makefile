@@ -10,7 +10,7 @@ OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Werror -Wextra -I ../../includes/
 CC = cc
 
-all : $(LIB) clean
+all : $(LIB)
 
 $(LIB) : $(OBJS)
 	$(AR) rcs $(LIB) $(OBJS)

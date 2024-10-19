@@ -11,12 +11,12 @@ FLAGS = -g -Wall -Werror -Wextra -I includes/
 LIBS = src/libft/
 BUILT_LIBS = src/libft/libft.a
 
-all : $(BUILT_LIBS) $(SERVER_NAME) $(CLIENT_NAME)
+all : $(SERVER_NAME) $(CLIENT_NAME)
 
-$(SERVER_NAME) : $(SERVER_OBJS)
+$(SERVER_NAME) : $(BUILT_LIBS) $(SERVER_OBJS)
 	$(CC) $(FLAGS) $(SERVER_OBJS) $(BUILT_LIBS) -o $(SERVER_NAME)
 
-$(CLIENT_NAME) : $(CLIENT_OBJS)
+$(CLIENT_NAME) : $(BUILT_LIBS) $(CLIENT_OBJS)
 	$(CC) $(FLAGS) $(CLIENT_OBJS) $(BUILT_LIBS) -o $(CLIENT_NAME)
 
 %.o : %.c
