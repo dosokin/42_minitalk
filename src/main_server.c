@@ -6,7 +6,7 @@
 /*   By: dosokin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 23:23:27 by dosokin           #+#    #+#             */
-/*   Updated: 2024/10/18 23:34:36 by dosokin          ###   ########.fr       */
+/*   Updated: 2024/10/19 13:15:25 by dosokin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "server_minitalk.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <signal.h>
 
 void	display_pid(void)
 {
@@ -29,7 +30,10 @@ void	display_pid(void)
 void	set_sig_handler(int sig, void (f)(int, siginfo_t *, void *))
 {
 	struct sigaction	new_action;
+	sigset_t		    set;
 
+	sigemptyset(&set);
+	new_action.sa_mask = set;
 	new_action.sa_flags = SA_SIGINFO;
 	new_action.sa_sigaction = f;
 	sigaction(sig, &new_action, NULL);

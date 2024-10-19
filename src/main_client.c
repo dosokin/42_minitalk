@@ -27,8 +27,11 @@ static void	panic_server(int sig)
 static void	set_sig_handler(int sig, void (f)(int))
 {
 	struct sigaction	new_action;
+    sigset_t		    set;
 
-	new_action.sa_handler = f;
+    sigemptyset(&set);
+    new_action.sa_mask = set;
+    new_action.sa_handler = f;
 	new_action.sa_flags = SA_NODEFER;
 	sigaction(sig, &new_action, NULL);
 }
