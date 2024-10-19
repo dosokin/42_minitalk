@@ -6,7 +6,7 @@
 /*   By: dosokin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 23:23:20 by dosokin           #+#    #+#             */
-/*   Updated: 2024/10/18 23:32:23 by dosokin          ###   ########.fr       */
+/*   Updated: 2024/10/19 12:39:43 by dosokin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	main(int argc, char **argv)
 	error = false;
 	pid = ft_safe_atoi(argv[1], &error);
 	if (error || pid <= MAIN_PROCESS)
+	{
+		write(2, "Error\nInvalid PID\n", 18);
 		return (1);
+	}
 	set_sig_handler(SIGUSR1, server_available);
 	set_sig_handler(SIGUSR2, panic_server);
 	message = argv[2];
